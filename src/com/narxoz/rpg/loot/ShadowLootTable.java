@@ -24,5 +24,9 @@ public class ShadowLootTable implements LootTable {
     public LootTable clone(){
         return new ShadowLootTable();
     }
+    @Override
+    public String getLootInfo() {
+        return "Items=" + getItems() + " | Gold=" + getGoldDrop() + " | EXP=" + getExperienceDrop();
+    }
 
 }

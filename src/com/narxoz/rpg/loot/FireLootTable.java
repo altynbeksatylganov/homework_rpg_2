@@ -22,6 +22,10 @@ public class FireLootTable implements LootTable {
     public LootTable clone(){
         return new FireLootTable();
     }
+    @Override
+    public String getLootInfo() {
+        return "Items=" + getItems() + " | Gold=" + getGoldDrop() + " | EXP=" + getExperienceDrop();
+    }
 
 
 }

@@ -3,12 +3,9 @@ package com.narxoz.rpg.enemy;
 import com.narxoz.rpg.combat.Ability;
 import com.narxoz.rpg.loot.LootTable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class Goblin implements Enemy {
+public class Orc implements Enemy {
 
     private String name;
     private int health;
@@ -22,14 +19,12 @@ public class Goblin implements Enemy {
     private List<Ability> abilities;
     private LootTable lootTable;
 
-    public Goblin(String name) {
+    public Orc(String name) {
         this.name = name;
-
-
-        this.health = 100;
-        this.damage = 15;
-        this.defense = 5;
-        this.speed = 35;
+        this.health = 200;
+        this.damage = 35;
+        this.defense = 18;
+        this.speed = 20;
 
         this.element = "NONE";
         this.aiBehavior = "AGGRESSIVE";
@@ -38,23 +33,19 @@ public class Goblin implements Enemy {
         this.lootTable = null;
     }
 
-
-    public Goblin(String name, int health, int damage, int defense, int speed,
-                  String element, String aiBehavior, List<Ability> abilities, LootTable lootTable) {
+    public Orc(String name, int health, int damage, int defense, int speed,
+               String element, String aiBehavior, List<Ability> abilities, LootTable lootTable) {
         this.name = name;
         this.health = health;
         this.damage = damage;
         this.defense = defense;
         this.speed = speed;
+
         this.element = element;
         this.aiBehavior = aiBehavior;
 
-
         this.abilities = new ArrayList<>();
-        if (abilities != null) {
-            for (Ability a : abilities) this.abilities.add(a == null ? null : a.clone());
-        }
-
+        if (abilities != null) for (Ability a : abilities) this.abilities.add(a == null ? null : a.clone());
 
         this.lootTable = (lootTable == null) ? null : lootTable.clone();
     }
@@ -72,17 +63,15 @@ public class Goblin implements Enemy {
 
     @Override
     public void displayInfo() {
-        System.out.println("=== " + name + " (Goblin) ===");
+        System.out.println("=== " + name + " (Orc) ===");
         System.out.println("Health: " + health + " | Damage: " + damage + " | Defense: " + defense + " | Speed: " + speed);
         System.out.println("Element: " + element);
         System.out.println("AI Behavior: " + aiBehavior);
-
         System.out.println("Abilities (" + abilities.size() + "):");
         for (Ability a : abilities) {
             if (a == null) continue;
             System.out.println(" - " + a.getName() + " (dmg=" + a.getDamage() + "): " + a.getDescription());
         }
-
         if (lootTable != null) {
             System.out.println("Loot items: " + lootTable.getItems());
             System.out.println("Gold: " + lootTable.getGoldDrop() + " | EXP: " + lootTable.getExperienceDrop());
@@ -93,24 +82,13 @@ public class Goblin implements Enemy {
 
     @Override
     public Enemy clone() {
-        // DEEP COPY: abilities + lootTable
-        return new Goblin(
-                this.name,
-                this.health,
-                this.damage,
-                this.defense,
-                this.speed,
-                this.element,
-                this.aiBehavior,
-                this.abilities,
-                this.lootTable
+        return new Orc(
+                this.name, this.health, this.damage, this.defense, this.speed,
+                this.element, this.aiBehavior, this.abilities, this.lootTable
         );
     }
 
-    @Override
-    public void setElement(String element) {
-        this.element = element;
-    }
+    @Override public void setElement(String element) { this.element = element; }
 
     @Override
     public void multiplyStats(double multiplier) {

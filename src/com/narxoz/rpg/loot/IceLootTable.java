@@ -23,6 +23,10 @@ public class IceLootTable implements LootTable {
     public LootTable clone(){
         return new IceLootTable();
     }
+    @Override
+    public String getLootInfo() {
+        return "Items=" + getItems() + " | Gold=" + getGoldDrop() + " | EXP=" + getExperienceDrop();
+    }
 
 
 
