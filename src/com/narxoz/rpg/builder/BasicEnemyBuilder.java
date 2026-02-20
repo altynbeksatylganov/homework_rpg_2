@@ -60,7 +60,7 @@ public class BasicEnemyBuilder implements EnemyBuilder {
 
     @Override
     public Enemy build() {
-        giif (name == null || name.isBlank()) throw new IllegalStateException("Name is required");
+        if (name == null || name.isBlank()) throw new IllegalStateException("Name is required");
         if (health <= 0) throw new IllegalStateException("Health must be positive");
 
         Enemy enemy = new Goblin(
